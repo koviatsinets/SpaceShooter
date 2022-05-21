@@ -5,27 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <title>SpaceShooter</title>
 </head>
 <body>
     <div class="left-block">
-        <!-- <button>Режим стрельбы</button> -->
-        <button>Пауза</button>
-        <button>Правила игры и управление</button>
-        <button>Таблица рекордов</button>
+        <div class="button-pause" title="Поставить игру на паузу"></div>
+        <div class="button-rules" title="Описание управления и правил игры"></div>
+        <div class="button-records" title="Таблица рекордов"></div>
     </div>
     <div class="center-block">
         <div class="progress">
-            <div class="score">Score: </div>
-            <div class="level">Level: </div>
+            <div class="level">
+                <div class="level-name">Level:</div>
+                <div class="level-number"></div>
+            </div>
+            <div class="score">
+                <div class="score-name">Score:</div>
+                <div class="score-number"></div>
+            </div>
         </div>
         <canvas id="canvas"></canvas>
-        <div class="github">GitHub: koviatsinets </div>
+        <a href="https://github.com/koviatsinets" class="github" target="_blank">github.com/koviatsinets</a>
     </div>
     <div class="right-block">
-        <button>Светлая/темная тема</button>
-        <button>Язык</button>
-        <button>Звук</button>
+        <div class="button-theme" title="Смена темы светлая/темная"></div>
+        <div class="button-sound" title="Выключение и включение звука"></div>
+        <div class="button-lang" title="Смена языка"></div>
+        
         
     </div>
 </body>
