@@ -1,8 +1,12 @@
+* {
+    transition: 0.3s;
+}
+
 body {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     padding: 0;
     margin: 0;
     height: 100vh;
@@ -12,9 +16,8 @@ body {
 
 .left-block,
 .right-block {
-    width: 20%;
-    height: 80%;
-    border: solid white 1px;
+    width: 15%;
+    gap: 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -26,21 +29,108 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
 }
 
 .progress {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 100%;
+    width: 400px;
 }
 
 .score,
 .level {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 150px;
+}
+
+.score-name,
+.level-name {
     color: white;
+    font-size: 20px;
+}
+
+.score-number {
+    color: yellow;
+    font-size: 40px;
+}
+
+.level-number {
+    color: red;
+    font-size: 40px;
 }
 
 .github {
+    margin-top: 10px;
     color: white;
+    text-decoration: none;
+}
+
+.button-pause,
+.button-rules,
+.button-records,
+.button-theme,
+.button-lang,
+.button-sound {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: rgb(180, 180, 180);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    cursor: pointer;
+}
+
+.button-pause:hover,
+.button-rules:hover,
+.button-records:hover,
+.button-theme:hover,
+.button-lang:hover,
+.button-sound:hover {
+    -webkit-box-shadow: 0px 0px 8px 5px rgba(255, 255, 255, 0.5);
+    -moz-box-shadow: 0px 0px 8px 5px rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 0px 8px 5px rgba(255, 255, 255, 0.5);
+}
+
+.button-pause {
+    background-image: url(./assets/img/pause_black_24dp.svg);
+}
+
+.button-pause-tgl {
+    background-image: url(./assets/img/play_arrow_black_24dp.svg);
+}
+
+.button-rules {
+    background-image: url(./assets/img/keyboard_black_24dp.svg);
+}
+
+.button-records {
+    background-image: url(./assets/img/star_black_24dp.svg);
+}
+
+.button-theme {
+    background-image: url(./assets/img/light_mode_black_24dp.svg);
+}
+
+.button-theme-tgl {
+    background-image: url(./assets/img/dark_mode_black_24dp.svg);
+}
+
+.button-lang {
+    background-image: url(./assets/img/language_black_24dp.svg);
+}
+
+.button-sound {
+    background-image: url(./assets/img/volume_up_black_24dp.svg);
+}
+
+.button-sound-tgl {
+    background-image: url(./assets/img/volume_off_black_24dp.svg);
 }
