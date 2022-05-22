@@ -1,5 +1,6 @@
 * {
     transition: 0.3s;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 body {
@@ -16,7 +17,7 @@ body {
 
 .left-block,
 .right-block {
-    width: 15%;
+    width: 10%;
     gap: 100px;
     display: flex;
     flex-direction: column;
@@ -56,15 +57,16 @@ body {
 .score-number {
     color: yellow;
     font-size: 40px;
+    line-height: 0px;
 }
 
 .level-number {
     color: red;
     font-size: 40px;
+    line-height: 0px;
 }
 
 .github {
-    margin-top: 10px;
     color: white;
     text-decoration: none;
 }
@@ -133,4 +135,40 @@ body {
 
 .button-sound-tgl {
     background-image: url(./assets/img/volume_off_black_24dp.svg);
+}
+
+.rules {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.rules-tgl {
+    display: flex;
+}
+
+.container-rulesб
+.container-records {
+    border-radius: 20px;
+    width: 500px;
+    height: 520px;
+    background-color: rgb(48, 48, 48);
+    z-index: 2;
+    text-align: center;
+    color: white;
+    
+    
+}
+.container-rules p {
+    text-align: justify;
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+    padding-right: 50px;
+    color: white;
 }

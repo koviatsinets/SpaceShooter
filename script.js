@@ -169,27 +169,6 @@ class Alien {
             element.posY += this.speed;
             ctx.drawImage(img, element.posX, element.posY, element.width, element.height); //рисуем картинку в канвас
 
-            // ctx.fillStyle='yellow';
-            // ctx.beginPath();
-            // ctx.moveTo(element.posX+20,element.posY-30);
-            // ctx.lineTo(element.posX+50,element.posY+50);
-            // ctx.lineTo(element.posX-30,element.posY);
-            // ctx.lineTo(element.posX+70,element.posY);
-            // ctx.lineTo(element.posX-20,element.posY+50);
-            // ctx.fill();
-
-            ctx.fillStyle='red';
-            ctx.beginPath();
-            ctx.moveTo(element.posX+20,element.posY-30);
-            ctx.lineTo(element.posX+50,element.posY+50);
-            ctx.lineTo(element.posX-30,element.posY);
-            ctx.lineTo(element.posX+70,element.posY);
-            ctx.lineTo(element.posX-20,element.posY+50);
-            ctx.fill();
-
-            
-            
-
             if (bullet.bulletPosX >= element.posX && bullet.bulletPosX <= element.posX + 40 && bullet.bulletPosY >= element.posY - 30 && bullet.bulletPosY <= element.posY + 30) {
                 
                 
@@ -285,6 +264,7 @@ let buttomSound = document.querySelector('.button-sound');
 let buttonLang = document.querySelector('.button-lang');
 let buttonRules = document.querySelector('.button-rules');
 let buttonRecords = document.querySelector('.button-records');
+let rules = document.querySelector('.rules');
 
 buttonPause.addEventListener('click', switchPause);
 buttomTheme.addEventListener('click', switchTheme);
@@ -294,7 +274,9 @@ buttonRules.addEventListener('click', showRules);
 buttonRecords.addEventListener('click', showRecords);
 
 function switchPause() {
+    
     if (flagPause === false) {
+        console.log('pause ')
         pause();
     } else if (flagPause === true) {
         cancelPause();
@@ -360,7 +342,7 @@ function switchLang() {
 }
 
 function showRules() {
-
+    rules.classList.toggle('rules-tgl')
 }
 
 function showRecords() {
@@ -371,7 +353,11 @@ function restart() {
     ctx.fillStyle='white';
     ctx.font='bold 40px Arial';
     ctx.fillText('GAME OVER',130,260);
-    pause();
+    bullet.isFire = true;
+    ship.stop()
+    coin.stop();
+    alien.stop();
+    bullet.stop();
     countRestart++;
     console.log(countRestart)
     if (countRestart >= 120) {
@@ -410,21 +396,16 @@ function reverseCountText() {
         ctx.font='bold 60px Arial';
         ctx.fillText('GO!',200,260);
     }
-    
 }
 
 function tick() {
     countTick++;
     scoreText.innerHTML = countScore;
     levelText.innerHTML = countLevel;
-    
-   
 
     ctx.fillStyle = "darkblue";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     reverseCountText();
-
-    
 
     coin.render(ctx);
 
@@ -440,8 +421,12 @@ function tick() {
     ship.render(ctx);
     bullet.controlMove();
     alien.render(ctx);
-    
-    
+
+    if (flagPause === true) {
+        ctx.fillStyle='white';
+        ctx.font='bold 40px Arial';
+        ctx.fillText('PAUSE',190,260);
+    }
 
     requestAnimationFrame(tick);
   }
