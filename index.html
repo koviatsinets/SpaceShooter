@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>SpaceShooter</title>
 </head>
 <body>
     <div class="left-block">
-        <div class="button-pause" title="Поставить игру на паузу"></div>
+        <div class="button-lang" title="Смена языка"></div>
         <div class="button-rules" title="Описание управления и правил игры"></div>
         <div class="button-records" title="Таблица рекордов"></div>
     </div>
@@ -30,11 +30,24 @@
         <a href="https://github.com/koviatsinets" class="github" target="_blank">github.com/koviatsinets</a>
     </div>
     <div class="right-block">
+        <div class="button-pause" title="Поставить игру на паузу"></div>
         <div class="button-theme" title="Смена темы светлая/темная"></div>
         <div class="button-sound" title="Выключение и включение звука"></div>
-        <div class="button-lang" title="Смена языка"></div>
-        
-        
+    </div>
+    <div class="rules">
+        <div class="container-rules">
+            <h4>Управление кораблем:</h4>
+            <p><span class="material-symbols-outlined">arrow_upward</span> - движение вверх</p>
+            <p><span class="material-symbols-outlined">arrow_downward</span> - движение вниз</p>
+            <p><span class="material-symbols-outlined">arrow_back</span> - движение влево</p>
+            <p><span class="material-symbols-outlined">arrow_forward</span> - движение вправо</p>
+            <p>SPACE</span> - выстрел</p>
+            <h4>Процесс игры:</h4>
+            <p>Уничтожение НЛО: +10 очков, подбор монеты: +10 очков. Cлева и справа от экрана расположены кнопки настроек. Слева: смена пользователя, описание управления, таблица рекордов. Справа: постановка на паузу, переключение светлой/темной темы, выключение/включение звука, смена языка. Результаты сохраняются в таблице рекордов. Хорошей игры! :)</p>
+        </div>
+    </div>
+    <div class="records">
+        <div class="container-records"></div>
     </div>
 </body>
 <script src="./script.js"></script>
