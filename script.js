@@ -264,7 +264,12 @@ let buttomSound = document.querySelector('.button-sound');
 let buttonLang = document.querySelector('.button-lang');
 let buttonRules = document.querySelector('.button-rules');
 let buttonRecords = document.querySelector('.button-records');
+let buttonCloseRules = document.querySelector('.button-close-rules');
+let buttonCloseRecods = document.querySelector('.button-close-records');
 let rules = document.querySelector('.rules');
+let records = document.querySelector('.records');
+let buttonStart = document.querySelector('.button-start');
+let helloWindow = document.querySelector('.hello-window');
 
 buttonPause.addEventListener('click', switchPause);
 buttomTheme.addEventListener('click', switchTheme);
@@ -272,11 +277,13 @@ buttomSound.addEventListener('click', switchMute);
 buttonLang.addEventListener('click', switchLang);
 buttonRules.addEventListener('click', showRules);
 buttonRecords.addEventListener('click', showRecords);
+buttonCloseRecods.addEventListener('click', showRecords);
+buttonCloseRules.addEventListener('click', showRules);
+buttonStart.addEventListener('click', startGame);
 
 function switchPause() {
     
     if (flagPause === false) {
-        console.log('pause ')
         pause();
     } else if (flagPause === true) {
         cancelPause();
@@ -342,11 +349,21 @@ function switchLang() {
 }
 
 function showRules() {
-    rules.classList.toggle('rules-tgl')
+    if (flagPause === false) {
+        pause();
+    } else {
+        cancelPause();
+    }
+    rules.classList.toggle('rules-tgl');
 }
 
 function showRecords() {
-
+    if (flagPause === false) {
+        pause();
+    } else {
+        cancelPause();
+    }
+    records.classList.toggle('records-tgl');
 }
 
 function restart() {
@@ -359,10 +376,7 @@ function restart() {
     alien.stop();
     bullet.stop();
     countRestart++;
-    console.log(countRestart)
     if (countRestart >= 120) {
-        
-        console.log('Сработка')
         cancelPause();
         coin.arrCoins.length = 0;
         alien.arrAliens.length = 0;
@@ -398,37 +412,41 @@ function reverseCountText() {
     }
 }
 
-function tick() {
-    countTick++;
-    scoreText.innerHTML = countScore;
-    levelText.innerHTML = countLevel;
-
-    ctx.fillStyle = "darkblue";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    reverseCountText();
-
-    coin.render(ctx);
-
-    if (flagPause === false) {
-        if (countTick%180 === 0) {
-            coin.createNewCoin();
+function startGame() {
+    helloWindow.setAttribute('style', 'display: none');
+    function tick() {
+        countTick++;
+        scoreText.innerHTML = countScore;
+        levelText.innerHTML = countLevel;
+    
+        ctx.fillStyle = "darkblue";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        reverseCountText();
+    
+        coin.render(ctx);
+    
+        if (flagPause === false) {
+            if (countTick%180 === 0) {
+                coin.createNewCoin();
+            }
+            if (countTick%120 === 0) {
+                alien.createNewAlien();
+            }
         }
-        if (countTick%120 === 0) {
-            alien.createNewAlien();
+        bullet.render(ctx);
+        ship.render(ctx);
+        bullet.controlMove();
+        alien.render(ctx);
+    
+        if (flagPause === true) {
+            ctx.fillStyle='white';
+            ctx.font='bold 40px Arial';
+            ctx.fillText('PAUSE',190,260);
         }
-    }
-    bullet.render(ctx);
-    ship.render(ctx);
-    bullet.controlMove();
-    alien.render(ctx);
-
-    if (flagPause === true) {
-        ctx.fillStyle='white';
-        ctx.font='bold 40px Arial';
-        ctx.fillText('PAUSE',190,260);
-    }
-
+    
+        requestAnimationFrame(tick);
+      }
+    
     requestAnimationFrame(tick);
-  }
+}
 
-requestAnimationFrame(tick);
