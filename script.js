@@ -258,6 +258,7 @@ let audioButton = new Audio();
 let countTick = 0;
 let countScore = 0;
 let countRestart = 0;
+let levelSpeed = 1;
 
 let flagPause = false;
 let flagTheme = false;
@@ -514,18 +515,29 @@ function startGame() {
         }
 
         if (countScore > 400 && countScore < 599) {
-            alien.speed = 3;
+            levelSpeed = 2;
+            // alien.speed = 3;
             levelText.innerHTML = 3;
         }
 
         if (countScore > 600 && countScore < 799) {
-            alien.speed = 4;
+            levelSpeed = 3;
+            // alien.speed = 4;
             levelText.innerHTML = 4;
         }
 
-        if (countScore > 800) {
-            alien.speed = 5;
+         if (countScore > 800) {
+            levelSpeed = 4;
+            // alien.speed = 4;
             levelText.innerHTML = 5;
+        }
+
+        if (countScore > 1000) {
+            levelSpeed = 5;
+            bullet.speed = 14;
+            ship.speed = 8;
+            // alien.speed = 4;
+            levelText.innerHTML = 6;
         }
 
         ctx.fillStyle = "darkblue";
@@ -538,7 +550,7 @@ function startGame() {
             if (countTick%180 === 0) {
                 coin.createNewCoin();
             }
-            if (countTick%120 === 0) {
+            if (countTick%(120 - (levelSpeed - 1)*20) === 0) {
                 alien.createNewAlien();
             }
         }
