@@ -5,7 +5,6 @@ class Ship {
         this.speed = 5;
         this.width = 50;
         this.height = 50;
-
         document.addEventListener("keydown", this.buttonPush);
         document.addEventListener("keyup", this.buttonDrop);
     }
@@ -180,17 +179,13 @@ class Alien {
                 countScore += 10;
             }
             if (element.posX >= ship.posX - element.width + 1 && element.posX <= ship.posX + ship.width - 5 && element.posY >= ship.posY - element.height + 10 && element.posY <= ship.posY + ship.height) {
-                
                 restart();
-
             }
             if (element.posY >= canvas.height - element.width) {
-                element.speed = 0;
                 restart();
             }
         });
     }
-
 }
 
 class Coin {
@@ -251,7 +246,6 @@ let audioMusic = new Audio();
 let audioBang = new Audio();
 let audioShoot = new Audio();
 let audioCoins = new Audio();
-// let audioGameover = new Audio();
 let audioStartGame = new Audio();
 let audioButton = new Audio();
 
@@ -321,13 +315,6 @@ function playCoins() {
     audioCoins.play();
 }
 
-// function playGameover() {
-//     audioGameover.src = './assets/audio/gameover.wav';
-//     audioGameover.volume = 1;
-//     audioGameover.currentTime = 0;
-//     audioGameover.play();
-// }
-
 function playStartGame() {
     audioStartGame.src = './assets/audio/startgame.wav';
     audioStartGame.volume = 1;
@@ -341,8 +328,6 @@ function playButton() {
     audioButton.currentTime = 0;
     audioButton.play();
 }
-
-
 
 function switchPause() {
     playButton()
@@ -412,7 +397,6 @@ function switchMute() {
         audioBang.volume = 0;
         audioShoot.volume = 0;
         audioCoins.volume = 0;
-        // audioGameover.volume = 0;
         audioStartGame.volume = 0;
         audioButton.volume = 0;
         flagSound = false;
@@ -421,7 +405,6 @@ function switchMute() {
         audioBang.volume = 1;
         audioShoot.volume = .50;
         audioCoins.volume = 1;
-        // audioGameover.volume = 1;
         audioStartGame.volume = 1;
         audioButton.volume = 1;
         flagSound = true;
@@ -431,7 +414,6 @@ function switchMute() {
 
 function switchLang() {
     playButton()
-
 }
 
 function showRules() {
@@ -459,7 +441,6 @@ function restart() {
     coin.stop();
     alien.stop();
     bullet.stop();
-    // playGameover();
     ctx.fillStyle='white';
     ctx.font='bold 40px Arial';
     ctx.fillText('GAME OVER',130,260);
@@ -516,19 +497,16 @@ function startGame() {
 
         if (countScore > 400 && countScore < 599) {
             levelSpeed = 2;
-            // alien.speed = 3;
             levelText.innerHTML = 3;
         }
 
         if (countScore > 600 && countScore < 799) {
             levelSpeed = 3;
-            // alien.speed = 4;
             levelText.innerHTML = 4;
         }
 
          if (countScore > 800) {
             levelSpeed = 4;
-            // alien.speed = 4;
             levelText.innerHTML = 5;
         }
 
@@ -543,7 +521,6 @@ function startGame() {
         ctx.fillStyle = "darkblue";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         reverseCountText();
-    
         coin.render(ctx);
     
         if (flagPause === false) {

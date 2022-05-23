@@ -4,7 +4,6 @@
 }
 
 body {
-    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -293,7 +292,6 @@ input {
 @media (min-width:1px) and (max-width: 768px) {
     
     body {
-        /* flex-direction: column; */
         flex-wrap: wrap;
     }
 
@@ -408,7 +406,6 @@ input {
         height: 90px;
         border-radius: 45px;
     }
-
 }
 
 @media (min-width:1px) and (max-width: 499px) { 
@@ -420,6 +417,4 @@ input {
     .button-sound {
         display: none;    
     }
-
-  
 }
