@@ -279,8 +279,137 @@ input {
     cursor: pointer;
 }
 
-.button-start:hover {
+.button-start:hover,
+.button-start:focus {
     -webkit-box-shadow: 0px 0px 8px 5px rgba(255, 255, 255, 0.5);
     -moz-box-shadow: 0px 0px 8px 5px rgba(255, 255, 255, 0.5);
     box-shadow: 0px 0px 8px 5px rgba(255, 255, 255, 0.5);
 }
+
+.mobile-button {
+    display: none;
+}
+
+@media (min-width: 1px) and (max-width: 768px) {
+    
+    body {
+        /* flex-direction: column; */
+        flex-wrap: wrap;
+    }
+
+    .github {
+        display: none;
+    }
+
+    .left-block,
+    .right-block {
+        flex-direction: row;
+        width: auto;
+        gap: 10px;  
+    }
+
+    .left-block {
+        order: 1
+    }
+    .right-block {
+        order: 2;
+        margin-left: 15px;
+    }
+    .center-block {
+        order: 3;
+    }
+
+    .button-pause,
+    .button-rules,
+    .button-records,
+    .button-theme,
+    .button-lang,
+    .button-sound {
+        border-radius: 0px;
+        width: 60px;   
+    }
+
+    .mobile-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 90%;
+        order: 5;
+    }
+
+    .mobile-button span {
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .group-left {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .group-right {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .first-lime,
+    .second-line,
+    .third-line {
+        height: 30%;
+    }
+
+    .second-line {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .button-left,
+    .button-right,
+    .button-up,
+    .button-down,
+    .button-central,
+    .button-space {
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        background-color: grey;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 2px;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .button-central {
+        opacity: 0;
+        
+    }
+
+    .button-space {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        font-weight: bold;
+        width: 90px;
+        height: 90px;
+        border-radius: 45px;
+    }
+
+}
+
+

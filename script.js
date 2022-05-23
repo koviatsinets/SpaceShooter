@@ -1,6 +1,5 @@
 class Ship { 
     constructor(posX, posY) {
-        
         this.posX = posX;
         this.posY = posY;
         this.speed = 5;
@@ -78,6 +77,7 @@ class Ship {
     shot() {
         if (bullet.isFire === false) {
             bullet.move();
+            playShoot();
         }
     }
 
@@ -162,6 +162,7 @@ class Alien {
         this.speed = 1;
     }
 
+
     render(ctx) {
         this.arrAliens.forEach((element, index) => {
             let img = new Image();
@@ -169,10 +170,9 @@ class Alien {
             element.posY += this.speed;
             ctx.drawImage(img, element.posX, element.posY, element.width, element.height); //рисуем картинку в канвас
 
-            if (bullet.bulletPosX >= element.posX && bullet.bulletPosX <= element.posX + 40 && bullet.bulletPosY >= element.posY - 30 && bullet.bulletPosY <= element.posY + 30) {
-                
-                
+            if (bullet.bulletPosX >= element.posX && bullet.bulletPosX <= element.posX + 40 && bullet.bulletPosY >= element.posY - 30 && bullet.bulletPosY <= element.posY + 30) {   
                 this.arrAliens.splice(index,1);
+                playBang();
                 bullet.bulletPosX = undefined;
                 bullet.bulletPosY = undefined;
                 bullet.speed = 0;
@@ -180,10 +180,12 @@ class Alien {
                 countScore += 10;
             }
             if (element.posX >= ship.posX - element.width + 1 && element.posX <= ship.posX + ship.width - 5 && element.posY >= ship.posY - element.height + 10 && element.posY <= ship.posY + ship.height) {
-                restart();
                 
+                restart();
+
             }
-            if (element.posY >= canvas.height - element.width + 10) {
+            if (element.posY >= canvas.height - element.width) {
+                element.speed = 0;
                 restart();
             }
         });
@@ -222,10 +224,13 @@ class Coin {
             ctx.arc(element.posX+5, element.posY+5, 5, 0, Math.PI*2, false);
             ctx.fill();
             if (element.posX >= ship.posX - element.width + 1 && element.posX <= ship.posX + ship.width && element.posY >= ship.posY - element.width && element.posY <= ship.posY + ship.width) {
+                element.speed = 0;                
                 this.arrCoins.splice(index,1);
-                countScore += 10;
+                playCoins();
+                countScore += 20;
             }
             if (element.posY >= canvas.height - element.width) {
+                element.speed = 0;  
                 this.arrCoins.splice(index,1);
             }
         });
@@ -242,10 +247,16 @@ let coin = new Coin();
 let ship = new Ship(canvas.width/2 - 15,canvas.height - 50);
 let bullet = new Bullet();
 let alien = new Alien();
+let audioMusic = new Audio();
+let audioBang = new Audio();
+let audioShoot = new Audio();
+let audioCoins = new Audio();
+// let audioGameover = new Audio();
+let audioStartGame = new Audio();
+let audioButton = new Audio();
 
 let countTick = 0;
 let countScore = 0;
-let countLevel = 0;
 let countRestart = 0;
 
 let flagPause = false;
@@ -281,8 +292,59 @@ buttonCloseRecods.addEventListener('click', showRecords);
 buttonCloseRules.addEventListener('click', showRules);
 buttonStart.addEventListener('click', startGame);
 
+function playMusic() {
+    audioMusic.src = './assets/audio/highway.mp3';
+    audioMusic.volume = 0.4;
+    audioMusic.currentTime = 0;
+    audioMusic.play();
+}
+
+function playBang() {
+    audioBang.src = './assets/audio/bang.wav';
+    audioBang.volume = 1;
+    audioBang.currentTime = 0;
+    audioBang.play();
+}
+
+function playShoot() {
+    audioShoot.src = './assets/audio/shoot.wav';
+    audioShoot.volume = .30;
+    audioShoot.currentTime = 0;
+    audioShoot.play();
+}
+
+function playCoins() {
+    audioCoins.src = './assets/audio/coins.wav';
+    audioCoins.volume = 1;
+    audioCoins.currentTime = 0;
+    audioCoins.play();
+}
+
+// function playGameover() {
+//     audioGameover.src = './assets/audio/gameover.wav';
+//     audioGameover.volume = 1;
+//     audioGameover.currentTime = 0;
+//     audioGameover.play();
+// }
+
+function playStartGame() {
+    audioStartGame.src = './assets/audio/startgame.wav';
+    audioStartGame.volume = 1;
+    audioStartGame.currentTime = -0.9;
+    audioStartGame.play();
+}
+
+function playButton() {
+    audioButton.src = './assets/audio/button.wav';
+    audioButton.volume = 1;
+    audioButton.currentTime = 0;
+    audioButton.play();
+}
+
+
+
 function switchPause() {
-    
+    playButton()
     if (flagPause === false) {
         pause();
     } else if (flagPause === true) {
@@ -310,6 +372,7 @@ function cancelPause() {
 }
 
 function switchTheme() {
+    playButton()
     if (flagTheme === false) {
         document.body.style.backgroundColor = 'whitesmoke';
         flagTheme = true;
@@ -341,14 +404,37 @@ function switchTheme() {
 }
 
 function switchMute() {
+    playButton()
+    
+    if (flagSound === true) {
+        audioMusic.volume = 0;
+        audioBang.volume = 0;
+        audioShoot.volume = 0;
+        audioCoins.volume = 0;
+        // audioGameover.volume = 0;
+        audioStartGame.volume = 0;
+        audioButton.volume = 0;
+        flagSound = false;
+    } else if (flagSound === false) {
+        audioMusic.volume = .40;
+        audioBang.volume = 1;
+        audioShoot.volume = .50;
+        audioCoins.volume = 1;
+        // audioGameover.volume = 1;
+        audioStartGame.volume = 1;
+        audioButton.volume = 1;
+        flagSound = true;
+    }
     buttomSound.classList.toggle('button-sound-tgl');
 }
 
 function switchLang() {
+    playButton()
 
 }
 
 function showRules() {
+    playButton()
     if (flagPause === false) {
         pause();
     } else {
@@ -358,6 +444,7 @@ function showRules() {
 }
 
 function showRecords() {
+    playButton();
     if (flagPause === false) {
         pause();
     } else {
@@ -367,14 +454,15 @@ function showRecords() {
 }
 
 function restart() {
-    ctx.fillStyle='white';
-    ctx.font='bold 40px Arial';
-    ctx.fillText('GAME OVER',130,260);
-    bullet.isFire = true;
     ship.stop()
     coin.stop();
     alien.stop();
     bullet.stop();
+    // playGameover();
+    ctx.fillStyle='white';
+    ctx.font='bold 40px Arial';
+    ctx.fillText('GAME OVER',130,260);
+    bullet.isFire = true;
     countRestart++;
     if (countRestart >= 120) {
         cancelPause();
@@ -382,7 +470,6 @@ function restart() {
         alien.arrAliens.length = 0;
         countTick = 0;
         countScore = 0;
-        countLevel = 0;
         countRestart = 0;
         ship.posX = canvas.width/2 - 15;
         ship.posY = canvas.height - 50;
@@ -413,12 +500,34 @@ function reverseCountText() {
 }
 
 function startGame() {
+    playStartGame()
+    playMusic();
     helloWindow.setAttribute('style', 'display: none');
     function tick() {
         countTick++;
         scoreText.innerHTML = countScore;
-        levelText.innerHTML = countLevel;
-    
+        levelText.innerHTML = 1;
+        
+        if (countScore > 200 && countScore < 399) {
+            alien.speed = 2;
+            levelText.innerHTML = 2;
+        }
+
+        if (countScore > 400 && countScore < 599) {
+            alien.speed = 3;
+            levelText.innerHTML = 3;
+        }
+
+        if (countScore > 600 && countScore < 799) {
+            alien.speed = 4;
+            levelText.innerHTML = 4;
+        }
+
+        if (countScore > 800) {
+            alien.speed = 5;
+            levelText.innerHTML = 5;
+        }
+
         ctx.fillStyle = "darkblue";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         reverseCountText();
