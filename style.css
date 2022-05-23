@@ -290,7 +290,7 @@ input {
     display: none;
 }
 
-@media (min-width: 1px) and (max-width: 768px) {
+@media (min-width:1px) and (max-width: 768px) {
     
     body {
         /* flex-direction: column; */
@@ -395,8 +395,7 @@ input {
     }
 
     .button-central {
-        opacity: 0;
-        
+        opacity: 0;   
     }
 
     .button-space {
@@ -412,4 +411,15 @@ input {
 
 }
 
+@media (min-width:1px) and (max-width: 499px) { 
+    .button-pause,
+    .button-rules,
+    .button-records,
+    .button-theme,
+    .button-lang,
+    .button-sound {
+        display: none;    
+    }
 
+  
+}
