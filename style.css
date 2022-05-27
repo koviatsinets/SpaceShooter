@@ -4,6 +4,7 @@
 }
 
 body {
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,7 +32,9 @@ body {
     align-items: center;
     gap: 20px;
 }
-
+.material-symbols-outlined {
+    pointer-events: none;
+}
 .progress {
     display: flex;
     align-items: center;
@@ -292,6 +295,7 @@ input {
 @media (min-width:1px) and (max-width: 768px) {
     
     body {
+        /* flex-direction: column; */
         flex-wrap: wrap;
     }
 
@@ -367,6 +371,10 @@ input {
         flex-direction: row;
     }
 
+    .bt {
+        margin-top: -5px;
+    }
+
     .button-left,
     .button-right,
     .button-up,
@@ -406,6 +414,7 @@ input {
         height: 90px;
         border-radius: 45px;
     }
+
 }
 
 @media (min-width:1px) and (max-width: 499px) { 
