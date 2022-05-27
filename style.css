@@ -1,10 +1,16 @@
 * {
     transition: 0.3s;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
 }
 
 body {
-    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -135,7 +141,7 @@ body {
 }
 
 .button-lang {
-    background-image: url(./assets/img/language_black_24dp.svg);
+    background-image: url(./assets/img/person_black_24dp.svg);
 }
 
 .button-sound {
