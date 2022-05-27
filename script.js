@@ -1,3 +1,5 @@
+let mobileButtons = document.querySelectorAll('.mobile-btns')
+console.log(mobileButtons)
 class Ship { 
     constructor(posX, posY) {
         this.posX = posX;
@@ -5,8 +7,47 @@ class Ship {
         this.speed = 5;
         this.width = 50;
         this.height = 50;
+
         document.addEventListener("keydown", this.buttonPush);
         document.addEventListener("keyup", this.buttonDrop);
+
+        document.addEventListener('touchstart', this.mobileButtonsMove);
+        document.addEventListener('touchend', this.mobileButtonsStop);
+
+    }
+
+    mobileButtonsMove = (EO) => {
+        console.log(EO.target.childNodes[0].innerText)
+        if (EO.target.childNodes[0].innerText === 'arrow_back') {
+            this.buttonLeft = true;
+        }
+        if (EO.target.childNodes[0].innerText === 'arrow_forward') {
+            this.buttonRight = true;
+        }
+        if (EO.target.childNodes[0].innerText === 'arrow_upward') {
+            this.buttonUp = true;
+        }
+        if (EO.target.childNodes[0].innerText === 'arrow_downward') {
+            this.buttonDown = true;
+        }
+        if (EO.target.childNodes[0].innerText === 'FIRE') {
+            this.shot();
+        }
+    }
+
+    mobileButtonsStop = (EO) => {
+        if (EO.target.childNodes[0].innerText === 'arrow_back') {
+            this.buttonLeft = false;
+        }
+        if (EO.target.childNodes[0].innerText === 'arrow_forward') {
+            this.buttonRight = false;
+        }
+        if (EO.target.childNodes[0].innerText === 'arrow_upward') {
+            this.buttonUp = false;
+        }
+        if (EO.target.childNodes[0].innerText === 'arrow_downward') {
+            this.buttonDown = false;
+        }
     }
 
     buttonPush = (EO) => {
@@ -179,13 +220,19 @@ class Alien {
                 countScore += 10;
             }
             if (element.posX >= ship.posX - element.width + 1 && element.posX <= ship.posX + ship.width - 5 && element.posY >= ship.posY - element.height + 10 && element.posY <= ship.posY + ship.height) {
+                
+                console.log(element.speed)
                 restart();
+
             }
             if (element.posY >= canvas.height - element.width) {
+
+                console.log(element.speed)
                 restart();
             }
         });
     }
+
 }
 
 class Coin {
@@ -232,6 +279,13 @@ class Coin {
     }
 }
 
+window.onbeforeunload=befUnload;
+
+  function befUnload(EO) {
+    EO=EO||window.event;
+      EO.returnValue='А у вас есть несохранённые изменения!';
+  };
+
 let canvas = document.querySelector('#canvas');
 let ctx = canvas.getContext("2d");
 
@@ -246,6 +300,7 @@ let audioMusic = new Audio();
 let audioBang = new Audio();
 let audioShoot = new Audio();
 let audioCoins = new Audio();
+// let audioGameover = new Audio();
 let audioStartGame = new Audio();
 let audioButton = new Audio();
 
@@ -263,6 +318,8 @@ let levelText = document.querySelector('.level-number');
 let scoreName = document.querySelector('.score-name');
 let levelName = document.querySelector('.level-name');
 let github = document.querySelector('.github');
+let userName = document.querySelector('#user-name');
+let currentUser = '';
 
 let buttonPause = document.querySelector('.button-pause');
 let buttomTheme = document.querySelector('.button-theme');
@@ -277,6 +334,15 @@ let records = document.querySelector('.records');
 let buttonStart = document.querySelector('.button-start');
 let helloWindow = document.querySelector('.hello-window');
 
+
+
+// let buttonUp = document.querySelector('.button-up');
+// let buttonLeft = document.querySelector('.button-left');
+// let buttonRight = document.querySelector('.button-right');
+// let buttonDown = document.querySelector('.button-down');
+// let buttonSpace = document.querySelector('.button-space');
+
+
 buttonPause.addEventListener('click', switchPause);
 buttomTheme.addEventListener('click', switchTheme);
 buttomSound.addEventListener('click', switchMute);
@@ -286,6 +352,83 @@ buttonRecords.addEventListener('click', showRecords);
 buttonCloseRecods.addEventListener('click', showRecords);
 buttonCloseRules.addEventListener('click', showRules);
 buttonStart.addEventListener('click', startGame);
+
+
+// let userN = 'Igor';
+// let userA = '312';
+
+
+
+// var ajaxHandlerScript="https://fe.it-academy.by/AjaxStringStorage2.php";
+// var updatePassword;
+// var stringName='LOKTEV_TEST_INFO';
+
+// storeInfo();
+
+// function storeInfo() {
+//     updatePassword=Math.random();
+//     $.ajax( {
+//             url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
+//             data : { f : 'LOCKGET', n : stringName, p : updatePassword },
+//             success : lockGetReady, error : errorHandler
+//         }
+//     );
+// }
+
+// function lockGetReady(callresult) {
+//     if ( callresult.error!=undefined )
+//         alert(callresult.error);
+//     else {
+//         // нам всё равно, что было прочитано -
+//         // всё равно перезаписываем
+//         var info={
+//             name : userN,
+//             age : userA
+//         };
+//         $.ajax( {
+//                 url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
+//                 data : { f : 'UPDATE', n : stringName, v : JSON.stringify(info), p : updatePassword },
+//                 success : updateReady, error : errorHandler
+//             }
+//         );
+//     }
+// }
+
+// function updateReady(callresult) {
+//     if ( callresult.error!=undefined )
+//         alert(callresult.error);
+// }
+
+// function restoreInfo() {
+//     $.ajax(
+//         {
+//             url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
+//             data : { f : 'READ', n : stringName },
+//             success : readReady, error : errorHandler
+//         }
+//     );
+// }
+
+// function readReady(callresult) {
+//     if ( callresult.error!=undefined )
+//         alert(callresult.error);
+//     else if ( callresult.result!="" ) {
+//         var info=JSON.parse(callresult.result);
+//         userN=info.name;
+//        userA.value=info.age;
+//     }
+// }
+
+// function errorHandler(jqXHR,statusStr,errorStr) {
+//     alert(statusStr+' '+errorStr);
+// }
+
+// restoreInfo();
+
+
+
+
+
 
 function playMusic() {
     audioMusic.src = './assets/audio/highway.mp3';
@@ -315,6 +458,13 @@ function playCoins() {
     audioCoins.play();
 }
 
+// function playGameover() {
+//     audioGameover.src = './assets/audio/gameover.wav';
+//     audioGameover.volume = 1;
+//     audioGameover.currentTime = 0;
+//     audioGameover.play();
+// }
+
 function playStartGame() {
     audioStartGame.src = './assets/audio/startgame.wav';
     audioStartGame.volume = 1;
@@ -328,6 +478,8 @@ function playButton() {
     audioButton.currentTime = 0;
     audioButton.play();
 }
+
+
 
 function switchPause() {
     playButton()
@@ -393,20 +545,20 @@ function switchMute() {
     playButton()
     
     if (flagSound === true) {
-        audioMusic.volume = 0;
-        audioBang.volume = 0;
-        audioShoot.volume = 0;
-        audioCoins.volume = 0;
-        audioStartGame.volume = 0;
-        audioButton.volume = 0;
+        audioMusic.muted = true;
+        audioBang.muted = true;
+        audioShoot.muted = true;
+        audioCoins.muted = true;
+        audioStartGame.muted = true;
+        audioButton.muted = true;
         flagSound = false;
     } else if (flagSound === false) {
-        audioMusic.volume = .40;
-        audioBang.volume = 1;
-        audioShoot.volume = .50;
-        audioCoins.volume = 1;
-        audioStartGame.volume = 1;
-        audioButton.volume = 1;
+        audioMusic.muted = false;
+        audioBang.muted = false;
+        audioShoot.muted = false;
+        audioCoins.muted = false;
+        audioStartGame.muted = false;
+        audioButton.muted = false;
         flagSound = true;
     }
     buttomSound.classList.toggle('button-sound-tgl');
@@ -414,6 +566,7 @@ function switchMute() {
 
 function switchLang() {
     playButton()
+
 }
 
 function showRules() {
@@ -445,8 +598,10 @@ function restart() {
     ctx.font='bold 40px Arial';
     ctx.fillText('GAME OVER',130,260);
     bullet.isFire = true;
+    levelSpeed = 1;
+    bullet.speed = 8;
     countRestart++;
-    if (countRestart >= 120) {
+    if (countRestart >= 110) {
         cancelPause();
         coin.arrCoins.length = 0;
         alien.arrAliens.length = 0;
@@ -482,6 +637,7 @@ function reverseCountText() {
 }
 
 function startGame() {
+
     playStartGame()
     playMusic();
     helloWindow.setAttribute('style', 'display: none');
@@ -507,20 +663,20 @@ function startGame() {
 
          if (countScore > 800) {
             levelSpeed = 4;
+            bullet.speed = 16;
             levelText.innerHTML = 5;
         }
 
         if (countScore > 1000) {
             levelSpeed = 5;
-            bullet.speed = 14;
             ship.speed = 8;
-            // alien.speed = 4;
             levelText.innerHTML = 6;
         }
 
         ctx.fillStyle = "darkblue";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         reverseCountText();
+    
         coin.render(ctx);
     
         if (flagPause === false) {
@@ -541,7 +697,6 @@ function startGame() {
             ctx.font='bold 40px Arial';
             ctx.fillText('PAUSE',190,260);
         }
-    
         requestAnimationFrame(tick);
       }
     
