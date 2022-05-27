@@ -11,7 +11,6 @@
 }
 
 body {
-    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,7 +141,7 @@ body {
 }
 
 .button-lang {
-    background-image: url(./assets/img/language_black_24dp.svg);
+    background-image: url(./assets/img/person_black_24dp.svg);
 }
 
 .button-sound {
