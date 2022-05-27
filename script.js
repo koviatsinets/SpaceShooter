@@ -29,6 +29,9 @@ class Ship {
         if (EO.target.childNodes[0].innerText === 'arrow_downward') {
             this.buttonDown = true;
         }
+        if (EO.target.childNodes[0].innerText === 'FIRE') {
+            this.shot();
+        }
     }
 
     mobileButtonsStop = (EO) => {
