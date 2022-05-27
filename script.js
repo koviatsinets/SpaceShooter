@@ -1,5 +1,5 @@
-let mobileButtons = document.querySelectorAll('.mobile-btns')
-console.log(mobileButtons)
+let mobileButtons = document.querySelectorAll('.mobile-btns');
+
 class Ship { 
     constructor(posX, posY) {
         this.posX = posX;
@@ -17,7 +17,6 @@ class Ship {
     }
 
     mobileButtonsMove = (EO) => {
-        console.log(EO.target.childNodes[0].innerText)
         if (EO.target.childNodes[0].innerText === 'arrow_back') {
             this.buttonLeft = true;
         }
@@ -220,14 +219,10 @@ class Alien {
                 countScore += 10;
             }
             if (element.posX >= ship.posX - element.width + 1 && element.posX <= ship.posX + ship.width - 5 && element.posY >= ship.posY - element.height + 10 && element.posY <= ship.posY + ship.height) {
-                
-                console.log(element.speed)
                 restart();
 
             }
             if (element.posY >= canvas.height - element.width) {
-
-                console.log(element.speed)
                 restart();
             }
         });
@@ -324,7 +319,7 @@ let currentUser = '';
 let buttonPause = document.querySelector('.button-pause');
 let buttomTheme = document.querySelector('.button-theme');
 let buttomSound = document.querySelector('.button-sound');
-let buttonLang = document.querySelector('.button-lang');
+let buttonPers = document.querySelector('.button-pers');
 let buttonRules = document.querySelector('.button-rules');
 let buttonRecords = document.querySelector('.button-records');
 let buttonCloseRules = document.querySelector('.button-close-rules');
@@ -346,7 +341,7 @@ let helloWindow = document.querySelector('.hello-window');
 buttonPause.addEventListener('click', switchPause);
 buttomTheme.addEventListener('click', switchTheme);
 buttomSound.addEventListener('click', switchMute);
-buttonLang.addEventListener('click', switchLang);
+buttonPers.addEventListener('click', switchPers);
 buttonRules.addEventListener('click', showRules);
 buttonRecords.addEventListener('click', showRecords);
 buttonCloseRecods.addEventListener('click', showRecords);
@@ -458,13 +453,6 @@ function playCoins() {
     audioCoins.play();
 }
 
-// function playGameover() {
-//     audioGameover.src = './assets/audio/gameover.wav';
-//     audioGameover.volume = 1;
-//     audioGameover.currentTime = 0;
-//     audioGameover.play();
-// }
-
 function playStartGame() {
     audioStartGame.src = './assets/audio/startgame.wav';
     audioStartGame.volume = 1;
@@ -564,9 +552,8 @@ function switchMute() {
     buttomSound.classList.toggle('button-sound-tgl');
 }
 
-function switchLang() {
-    playButton()
-
+function switchPers() {
+    startGame();
 }
 
 function showRules() {
