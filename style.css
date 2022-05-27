@@ -32,7 +32,9 @@ body {
     align-items: center;
     gap: 20px;
 }
-
+.material-symbols-outlined {
+    pointer-events: none;
+}
 .progress {
     display: flex;
     align-items: center;
