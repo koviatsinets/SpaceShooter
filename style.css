@@ -32,7 +32,9 @@ body {
     align-items: center;
     gap: 20px;
 }
-
+.material-symbols-outlined {
+    pointer-events: none;
+}
 .progress {
     display: flex;
     align-items: center;
@@ -369,6 +371,10 @@ input {
         flex-direction: row;
     }
 
+    .bt {
+        margin-top: -5px;
+    }
+
     .button-left,
     .button-right,
     .button-up,
@@ -420,6 +426,4 @@ input {
     .button-sound {
         display: none;    
     }
-
-  
 }
