@@ -17,6 +17,7 @@ class Ship {
     }
 
     mobileButtonsMove = (EO) => {
+        console.log(EO.target.childNodes[0].innerText)
         if (EO.target.childNodes[0].innerText === 'arrow_back') {
             this.buttonLeft = true;
         }

@@ -371,6 +371,10 @@ input {
         flex-direction: row;
     }
 
+    .bt {
+        margin-top: -5px;
+    }
+
     .button-left,
     .button-right,
     .button-up,
