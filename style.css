@@ -83,7 +83,7 @@ body {
 .button-rules,
 .button-records,
 .button-theme,
-.button-lang,
+.button-auto-fire,
 .button-sound {
     display: flex;
     align-items: center;
@@ -109,7 +109,7 @@ body {
 .button-rules:hover,
 .button-records:hover,
 .button-theme:hover,
-.button-lang:hover,
+.button-auto-fire:hover,
 .button-sound:hover {
     -webkit-box-shadow: 0px 0px 8px 5px rgba(255, 255, 255, 0.5);
     -moz-box-shadow: 0px 0px 8px 5px rgba(255, 255, 255, 0.5);
@@ -140,16 +140,21 @@ body {
     background-image: url(./assets/img/dark_mode_black_24dp.svg);
 }
 
-.button-lang {
-    background-image: url(./assets/img/person_black_24dp.svg);
-}
-
 .button-sound {
     background-image: url(./assets/img/volume_up_black_24dp.svg);
 }
 
 .button-sound-tgl {
     background-image: url(./assets/img/volume_off_black_24dp.svg);
+}
+
+.button-auto-fire {
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.button-auto-fire-tgl {
+    background-color: rgb(255, 86, 86);
 }
 
 .rules,
@@ -331,7 +336,7 @@ input {
     .button-rules,
     .button-records,
     .button-theme,
-    .button-lang,
+    .button-auto-fire,
     .button-sound {
         border-radius: 0px;
         width: 60px;   
@@ -428,7 +433,7 @@ input {
     .button-rules,
     .button-records,
     .button-theme,
-    .button-lang,
+    .button-auto-fire,
     .button-sound {
         display: none;    
     }
