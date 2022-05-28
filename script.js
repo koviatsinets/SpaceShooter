@@ -1,5 +1,5 @@
-let mobileButtons = document.querySelectorAll('.mobile-btns');
-
+let mobileButtons = document.querySelectorAll('.mobile-btns')
+let mobBut = document.querySelector('.mobile-button');
 class Ship { 
     constructor(posX, posY) {
         this.posX = posX;
@@ -11,8 +11,8 @@ class Ship {
         document.addEventListener("keydown", this.buttonPush);
         document.addEventListener("keyup", this.buttonDrop);
 
-        document.addEventListener('touchstart', this.mobileButtonsMove);
-        document.addEventListener('touchend', this.mobileButtonsStop);
+        mobBut.addEventListener('touchstart', this.mobileButtonsMove);
+        mobBut.addEventListener('touchend', this.mobileButtonsStop);
 
     }
 
@@ -220,7 +220,6 @@ class Alien {
             }
             if (element.posX >= ship.posX - element.width + 1 && element.posX <= ship.posX + ship.width - 5 && element.posY >= ship.posY - element.height + 10 && element.posY <= ship.posY + ship.height) {
                 restart();
-
             }
             if (element.posY >= canvas.height - element.width) {
                 restart();
@@ -341,11 +340,11 @@ let helloWindow = document.querySelector('.hello-window');
 buttonPause.addEventListener('click', switchPause);
 buttomTheme.addEventListener('click', switchTheme);
 buttomSound.addEventListener('click', switchMute);
-buttonPers.addEventListener('click', switchPers);
 buttonRules.addEventListener('click', showRules);
 buttonRecords.addEventListener('click', showRecords);
 buttonCloseRecods.addEventListener('click', showRecords);
 buttonCloseRules.addEventListener('click', showRules);
+buttonPers.addEventListener('click', changeUser)
 buttonStart.addEventListener('click', startGame);
 
 
@@ -552,10 +551,6 @@ function switchMute() {
     buttomSound.classList.toggle('button-sound-tgl');
 }
 
-function switchPers() {
-    startGame();
-}
-
 function showRules() {
     playButton()
     if (flagPause === false) {
@@ -621,6 +616,10 @@ function reverseCountText() {
         ctx.font='bold 60px Arial';
         ctx.fillText('GO!',200,260);
     }
+}
+
+function changeUser() {
+    document.location.reload();
 }
 
 function startGame() {
