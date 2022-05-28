@@ -1,5 +1,6 @@
 let mobileButtons = document.querySelectorAll('.mobile-btns')
 let mobBut = document.querySelector('.mobile-button');
+
 class Ship { 
     constructor(posX, posY) {
         this.posX = posX;
@@ -10,10 +11,8 @@ class Ship {
 
         document.addEventListener("keydown", this.buttonPush);
         document.addEventListener("keyup", this.buttonDrop);
-
         mobBut.addEventListener('touchstart', this.mobileButtonsMove);
         mobBut.addEventListener('touchend', this.mobileButtonsStop);
-
     }
 
     mobileButtonsMove = (EO) => {
@@ -117,6 +116,7 @@ class Ship {
         if (bullet.isFire === false) {
             bullet.move();
             playShoot();
+            window.navigator.vibrate(30);
         }
     }
 
@@ -128,15 +128,14 @@ class Ship {
         this.speed = 5;
     }
 
-
     render(ctx) {
         this.move();
         let img = new Image();
             img.src = './assets/img/ship.png';
             ctx.drawImage(img, this.posX, this.posY, this.width, this.height);
     }
-    
 }
+
 class Bullet {
     constructor(bulletStartPosX,bulletStartPosY) {
         this.bulletPosX = bulletStartPosX;
@@ -201,7 +200,6 @@ class Alien {
         this.speed = 1;
     }
 
-
     render(ctx) {
         this.arrAliens.forEach((element, index) => {
             let img = new Image();
@@ -226,7 +224,6 @@ class Alien {
             }
         });
     }
-
 }
 
 class Coin {
@@ -294,7 +291,6 @@ let audioMusic = new Audio();
 let audioBang = new Audio();
 let audioShoot = new Audio();
 let audioCoins = new Audio();
-// let audioGameover = new Audio();
 let audioStartGame = new Audio();
 let audioButton = new Audio();
 
@@ -328,15 +324,6 @@ let records = document.querySelector('.records');
 let buttonStart = document.querySelector('.button-start');
 let helloWindow = document.querySelector('.hello-window');
 
-
-
-// let buttonUp = document.querySelector('.button-up');
-// let buttonLeft = document.querySelector('.button-left');
-// let buttonRight = document.querySelector('.button-right');
-// let buttonDown = document.querySelector('.button-down');
-// let buttonSpace = document.querySelector('.button-space');
-
-
 buttonPause.addEventListener('click', switchPause);
 buttomTheme.addEventListener('click', switchTheme);
 buttomSound.addEventListener('click', switchMute);
@@ -346,83 +333,6 @@ buttonCloseRecods.addEventListener('click', showRecords);
 buttonCloseRules.addEventListener('click', showRules);
 buttonPers.addEventListener('click', changeUser)
 buttonStart.addEventListener('click', startGame);
-
-
-// let userN = 'Igor';
-// let userA = '312';
-
-
-
-// var ajaxHandlerScript="https://fe.it-academy.by/AjaxStringStorage2.php";
-// var updatePassword;
-// var stringName='LOKTEV_TEST_INFO';
-
-// storeInfo();
-
-// function storeInfo() {
-//     updatePassword=Math.random();
-//     $.ajax( {
-//             url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
-//             data : { f : 'LOCKGET', n : stringName, p : updatePassword },
-//             success : lockGetReady, error : errorHandler
-//         }
-//     );
-// }
-
-// function lockGetReady(callresult) {
-//     if ( callresult.error!=undefined )
-//         alert(callresult.error);
-//     else {
-//         // нам всё равно, что было прочитано -
-//         // всё равно перезаписываем
-//         var info={
-//             name : userN,
-//             age : userA
-//         };
-//         $.ajax( {
-//                 url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
-//                 data : { f : 'UPDATE', n : stringName, v : JSON.stringify(info), p : updatePassword },
-//                 success : updateReady, error : errorHandler
-//             }
-//         );
-//     }
-// }
-
-// function updateReady(callresult) {
-//     if ( callresult.error!=undefined )
-//         alert(callresult.error);
-// }
-
-// function restoreInfo() {
-//     $.ajax(
-//         {
-//             url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
-//             data : { f : 'READ', n : stringName },
-//             success : readReady, error : errorHandler
-//         }
-//     );
-// }
-
-// function readReady(callresult) {
-//     if ( callresult.error!=undefined )
-//         alert(callresult.error);
-//     else if ( callresult.result!="" ) {
-//         var info=JSON.parse(callresult.result);
-//         userN=info.name;
-//        userA.value=info.age;
-//     }
-// }
-
-// function errorHandler(jqXHR,statusStr,errorStr) {
-//     alert(statusStr+' '+errorStr);
-// }
-
-// restoreInfo();
-
-
-
-
-
 
 function playMusic() {
     audioMusic.src = './assets/audio/highway.mp3';
@@ -465,8 +375,6 @@ function playButton() {
     audioButton.currentTime = 0;
     audioButton.play();
 }
-
-
 
 function switchPause() {
     playButton()
@@ -673,6 +581,7 @@ function startGame() {
                 alien.createNewAlien();
             }
         }
+
         bullet.render(ctx);
         ship.render(ctx);
         bullet.controlMove();
@@ -685,7 +594,6 @@ function startGame() {
         }
         requestAnimationFrame(tick);
       }
-    
     requestAnimationFrame(tick);
 }
 
