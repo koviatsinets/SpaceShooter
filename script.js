@@ -169,15 +169,11 @@ class Bullet {
     }
 
     controlMove() {
-        if (this.bulletPosY < 0 && flagAutoShooting === false) {
+        if (this.bulletPosY < 0) {
             this.bulletPosX = undefined;
             this.bulletPosY = undefined;
             this.speed = 0;
             this.isFire = false;
-        }
-        if (this.bulletPosY < 0 && flagAutoShooting === true) {
-            this.bulletPosX = ship.posX + ship.width/2 - 2;
-            this.bulletPosY = ship.posY - 6;
         }
     }
 }
@@ -214,17 +210,12 @@ class Alien {
             ctx.drawImage(img, element.posX, element.posY, element.width, element.height); //рисуем картинку в канвас
 
             if (bullet.bulletPosX >= element.posX && bullet.bulletPosX <= element.posX + 40 && bullet.bulletPosY >= element.posY - 30 && bullet.bulletPosY <= element.posY + 30) {   
-                if (flagAutoShooting === true) {
-                    bullet.bulletPosX = ship.posX + ship.width/2 - 2;
-                    bullet.bulletPosY = ship.posY - 6;
-                } else if (flagAutoShooting === false) {
-                    bullet.bulletPosX = undefined;
-                    bullet.bulletPosY = undefined;
-                    bullet.speed = 0;
-                    bullet.isFire = false;
-                }
                 this.arrAliens.splice(index,1);
                 playBang();
+                bullet.bulletPosX = undefined;
+                bullet.bulletPosY = undefined;
+                bullet.speed = 0;
+                bullet.isFire = false;
                 countScore += 10;
             }
             if (element.posX >= ship.posX - element.width + 1 && element.posX <= ship.posX + ship.width - 5 && element.posY >= ship.posY - element.height + 10 && element.posY <= ship.posY + ship.height) {
@@ -315,7 +306,6 @@ let levelSpeed = 1;
 let flagPause = false;
 let flagTheme = false;
 let flagSound = true;
-let flagAutoShooting = false;
 
 let scoreText = document.querySelector('.score-number');
 let levelText = document.querySelector('.level-number');
@@ -328,7 +318,7 @@ let currentUser = '';
 let buttonPause = document.querySelector('.button-pause');
 let buttomTheme = document.querySelector('.button-theme');
 let buttomSound = document.querySelector('.button-sound');
-let buttonAutoFire = document.querySelector('.button-auto-fire');
+let buttonPers = document.querySelector('.button-pers');
 let buttonRules = document.querySelector('.button-rules');
 let buttonRecords = document.querySelector('.button-records');
 let buttonCloseRules = document.querySelector('.button-close-rules');
@@ -354,7 +344,7 @@ buttonRules.addEventListener('click', showRules);
 buttonRecords.addEventListener('click', showRecords);
 buttonCloseRecods.addEventListener('click', showRecords);
 buttonCloseRules.addEventListener('click', showRules);
-buttonAutoFire.addEventListener('click', changeModeShooting)
+buttonPers.addEventListener('click', changeUser)
 buttonStart.addEventListener('click', startGame);
 
 
@@ -628,10 +618,8 @@ function reverseCountText() {
     }
 }
 
-function changeModeShooting() {
-    buttonAutoFire.classList.toggle('button-auto-fire-tgl')
-    ship.shot();
-    flagAutoShooting = !flagAutoShooting;
+function changeUser() {
+    document.location.reload();
 }
 
 function startGame() {
