@@ -432,4 +432,8 @@ input {
     .button-sound {
         display: none;    
     }
+
+    .progress {
+        width: 100vw;
+    }
 }
