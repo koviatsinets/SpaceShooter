@@ -1,14 +1,17 @@
-let mobileButtons = document.querySelectorAll('.mobile-btns')
-let mobBut = document.querySelector('.mobile-button');
-
+console.log(window.innerWidth)
+let viewCoefficient = 1;
+if (window.innerWidth < 500) {
+    viewCoefficient = 0.7;
+}
 class Ship { 
     constructor(posX, posY) {
         this.posX = posX;
         this.posY = posY;
         this.speed = 5;
-        this.width = 50;
-        this.height = 50;
+        this.width = 50*viewCoefficient;
+        this.height = 50*viewCoefficient;
 
+        let mobBut = document.querySelector('.mobile-button');
         document.addEventListener("keydown", this.buttonPush);
         document.addEventListener("keyup", this.buttonDrop);
         mobBut.addEventListener('touchstart', this.mobileButtonsMove);
@@ -182,13 +185,13 @@ class Alien {
     constructor(posX, posY) {
         this.posX = posX;
         this.posY = posY;
-        this.width = 40;
-        this.height = 30;
+        this.width = 40*viewCoefficient;
+        this.height = 30*viewCoefficient;
         this.speed = 1;
     }
 
     createNewAlien() {
-        let ali = new Alien(Math.floor((Math.random()*440)) + 10, 0);
+        let ali = new Alien(Math.floor((Math.random()*(440*viewCoefficient))) + 10, 0);
         this.arrAliens.push(ali);
     }
 
@@ -207,7 +210,7 @@ class Alien {
             element.posY += this.speed;
             ctx.drawImage(img, element.posX, element.posY, element.width, element.height); //рисуем картинку в канвас
 
-            if (bullet.bulletPosX >= element.posX && bullet.bulletPosX <= element.posX + 40 && bullet.bulletPosY >= element.posY - 30 && bullet.bulletPosY <= element.posY + 30) {   
+            if (bullet.bulletPosX >= element.posX && bullet.bulletPosX <= element.posX + 40*viewCoefficient && bullet.bulletPosY >= element.posY - 30*viewCoefficient && bullet.bulletPosY <= element.posY + 30) {   
                 this.arrAliens.splice(index,1);
                 playBang();
                 bullet.bulletPosX = undefined;
@@ -231,13 +234,13 @@ class Coin {
     constructor(posX, posY) {
         this.posX = posX;
         this.posY = posY;
-        this.width = 10;
-        this.height = 10;
+        this.width = 10*viewCoefficient;
+        this.height = 10*viewCoefficient;
         this.speed = 1;
     }
 
     createNewCoin() {
-        let coin = new Coin(Math.floor((Math.random()*480)) + 10, 0);
+        let coin = new Coin(Math.floor((Math.random()*(480*viewCoefficient))) + 10, 0);
         this.arrCoins.push(coin);
     }
 
@@ -280,8 +283,8 @@ window.onbeforeunload=befUnload;
 let canvas = document.querySelector('#canvas');
 let ctx = canvas.getContext("2d");
 
-canvas.width = 500;
-canvas.height = 500;
+canvas.width = 500*viewCoefficient;
+canvas.height = 500*viewCoefficient;
 
 let coin = new Coin();
 let ship = new Ship(canvas.width/2 - 15,canvas.height - 50);
@@ -327,10 +330,10 @@ let helloWindow = document.querySelector('.hello-window');
 buttonPause.addEventListener('click', switchPause);
 buttomTheme.addEventListener('click', switchTheme);
 buttomSound.addEventListener('click', switchMute);
-buttonRules.addEventListener('click', showRules);
-buttonRecords.addEventListener('click', showRecords);
-buttonCloseRecods.addEventListener('click', showRecords);
-buttonCloseRules.addEventListener('click', showRules);
+buttonRules.addEventListener('click', switchToRulesPage);
+buttonRecords.addEventListener('click', switchToRecordPage);
+buttonCloseRecods.addEventListener('click', switchToMainPage);
+buttonCloseRules.addEventListener('click', switchToMainPage);
 buttonPers.addEventListener('click', changeUser)
 buttonStart.addEventListener('click', startGame);
 
@@ -485,8 +488,8 @@ function restart() {
     alien.stop();
     bullet.stop();
     ctx.fillStyle='white';
-    ctx.font='bold 40px Arial';
-    ctx.fillText('GAME OVER',130,260);
+    ctx.font=`bold ${40*viewCoefficient}px Arial`;
+    ctx.fillText('GAME OVER',130*viewCoefficient,260*viewCoefficient);
     bullet.isFire = true;
     levelSpeed = 1;
     bullet.speed = 8;
@@ -506,23 +509,23 @@ function restart() {
 function reverseCountText() {
     if (countTick >= 0 && countTick <= 30) {
         ctx.fillStyle='white';
-        ctx.font='bold 60px Arial';
-        ctx.fillText('3',230,260);
+        ctx.font=`bold ${60*viewCoefficient}px Arial`;
+        ctx.fillText('3',230*viewCoefficient,260*viewCoefficient);
     }
     if (countTick > 30 && countTick <= 60) {
         ctx.fillStyle='white';
-        ctx.font='bold 60px Arial';
-        ctx.fillText('2',230,260);
+        ctx.font=`bold ${60*viewCoefficient}px Arial`;
+        ctx.fillText('2',230*viewCoefficient,260*viewCoefficient);
     }
     if (countTick > 60 && countTick <= 90) {
         ctx.fillStyle='white';
-        ctx.font='bold 60px Arial';
-        ctx.fillText('1',230,260);
+        ctx.font=`bold ${60*viewCoefficient}px Arial`;
+        ctx.fillText('1',230*viewCoefficient,260*viewCoefficient);
     }
     if (countTick > 90 && countTick <= 120) {
         ctx.fillStyle='white';
-        ctx.font='bold 60px Arial';
-        ctx.fillText('GO!',200,260);
+        ctx.font=`bold ${60*viewCoefficient}px Arial`;
+        ctx.fillText('GO!',200*viewCoefficient,260*viewCoefficient);
     }
 }
 
@@ -589,11 +592,62 @@ function startGame() {
     
         if (flagPause === true) {
             ctx.fillStyle='white';
-            ctx.font='bold 40px Arial';
-            ctx.fillText('PAUSE',190,260);
+            ctx.font=`bold ${40*viewCoefficient}px Arial`;
+            ctx.fillText('PAUSE',190*viewCoefficient,260*viewCoefficient);
         }
         requestAnimationFrame(tick);
       }
     requestAnimationFrame(tick);
 }
 
+window.onhashchange=switchToStateFromURLHash;
+  let SPAState={};
+
+function switchToStateFromURLHash() {
+    let URLHash=window.location.hash;
+    let stateStr=URLHash.substring(1);
+    if ( stateStr!="" ) {
+        let parts=stateStr.split("_")
+        SPAState={ pagename: parts[0] };
+    }
+    else
+         SPAState={pagename:'Main'};
+
+    switch ( SPAState.pagename ) {
+        case 'Main':
+            cancelPause();
+            rules.classList.remove('rules-tgl');
+            records.classList.remove('records-tgl');
+            break;
+        case 'Rules':
+            pause();
+            rules.classList.toggle('rules-tgl');
+            console.log(SPAState.pagename)
+            break;
+        case 'Records':
+            pause();
+            records.classList.toggle('records-tgl');
+            console.log(SPAState.pagename)
+            break;
+    }
+
+  }
+
+  function switchToState(newState) {
+    let stateStr=newState.pagename;
+    location.hash=stateStr;
+  }
+
+  function switchToMainPage() {
+    switchToState( { pagename:'Main' } );
+  }
+
+  function switchToRulesPage() {
+    switchToState( { pagename:'Rules' } );
+  }
+
+  function switchToRecordPage() {
+    switchToState( { pagename:'Records' } );
+  }
+
+  switchToStateFromURLHash();
