@@ -1,4 +1,7 @@
-console.log(window.innerWidth)
+let ajaxHandlerScript="https://fe.it-academy.by/AjaxStringStorage2.php";
+let updatePassword;
+let stringName='KOVIATSINETS_SPACESHOOTER_RECORDS';
+
 let viewCoefficient = 1;
 if (window.innerWidth < 500) {
     viewCoefficient = 0.7;
@@ -220,9 +223,11 @@ class Alien {
                 countScore += 10;
             }
             if (element.posX >= ship.posX - element.width + 1 && element.posX <= ship.posX + ship.width - 5 && element.posY >= ship.posY - element.height + 10 && element.posY <= ship.posY + ship.height) {
+                // storeInfo();
                 restart();
             }
             if (element.posY >= canvas.height - element.width) {
+                // storeInfo();
                 restart();
             }
         });
@@ -651,3 +656,39 @@ function switchToStateFromURLHash() {
   }
 
   switchToStateFromURLHash();
+
+//   function storeInfo() {
+//     updatePassword=Math.random();
+//     $.ajax( {
+//             url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
+//             data : { f : 'LOCKGET', n : stringName, p : updatePassword },
+//             success : lockGetReady, error : errorHandler
+//         }
+//     );
+// }
+
+// function lockGetReady(callresult) {
+//     if ( callresult.error!=undefined )
+//         alert(callresult.error);
+//     else {
+//         var info={
+//             user : userName,
+//             score : countScore
+//         };
+//         $.ajax( {
+//                 url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
+//                 data : { f : 'UPDATE', n : stringName, v : JSON.stringify(info), p : updatePassword },
+//                 success : updateReady, error : errorHandler
+//             }
+//         );
+//     }
+// }
+
+// function updateReady(callresult) {
+//     if ( callresult.error!=undefined )
+//         alert(callresult.error);
+// }
+
+// function errorHandler(jqXHR,statusStr,errorStr) {
+//     alert(statusStr+' '+errorStr);
+// }
