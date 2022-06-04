@@ -45,7 +45,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 100vw;
+    width: 400px;
 }
 
 .score,
@@ -431,5 +431,9 @@ input {
     .button-pers,
     .button-sound {
         display: none;    
+    }
+
+    .progress {
+        width: 100vw;
     }
 }
